@@ -30,7 +30,8 @@ public class DubboITest {
 
 	@BeforeClass
 	public static void beforeClass() throws Exception {
-		DubboI_Configuration.newInstance("dubboi.properties"); // 指定dubbo-i配置文件
+		DubboI_Configuration.newInstance("dubboi.properties"); // 指定dubbo-i配置文件，默认启动restfull服务
+		//DubboI_Configuration.newInstance("dubboi.properties", false); // 指定dubbo-i配置文件，不启动restfull服务
 		LOGGER.info("spring启动，加载服务完成"); // 随spring而启动
 	}
 	
