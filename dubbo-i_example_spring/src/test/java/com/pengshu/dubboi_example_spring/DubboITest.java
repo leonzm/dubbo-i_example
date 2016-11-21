@@ -39,7 +39,7 @@ public class DubboITest {
 	public void testSayHelloImpl() {
 		try {
 			//RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_spring.service.SayHello", "1.0.0"); // @Service中的版本会覆盖dubboi.properties中的版本
-			RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_spring.service.SayHello", "1.0.0", DubboI_Configuration.Loadbalance.random.toString(), 100); // 获取service的同时，指定客户端的负载均衡等配置
+			RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_spring.service.SayHello", "1.0.0", DubboI_Configuration.Loadbalance.random.toString(), 100, 10); // 获取service的同时，指定客户端的负载均衡等配置
 			Object result = sayHelloService.invoke("sayHello", "李四");
 			System.out.println("testSayHelloImpl result: " + result);
 			Assert.assertNotNull(result);
