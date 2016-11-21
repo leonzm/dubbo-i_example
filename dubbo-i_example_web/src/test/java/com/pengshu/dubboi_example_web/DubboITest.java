@@ -82,6 +82,29 @@ public class DubboITest {
 		}
 	}
 	
+	@Test
+	public void testChineseSayHelloImpl() { // 同一个接口的不同实现类，可以用group来区分
+		String service = "com.pengshu.dubboi_example_web.service.SayHello";
+		String method = "sayHello";
+		int restfulPort = DubboI_Configuration.instance.getRestfulPort();
+		
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("arg0", "汤姆");
+		String url = "http://localhost:" + restfulPort + "?service=" + service + "&method=" + method + "&version=1.0.0&group=chinese" + "&parameters=" + JsonUtil.toJSON(parameters);
+		
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Content-Type", "application/json");
+		
+		try {
+			String result = HttpUtil.do_get(url, null, headers);
+			System.out.println("testSayHelloImpl result: " + result);
+			Assert.assertNotNull(result);
+			Assert.assertEquals("{\"data\":\"你好，汤姆\",\"success\":true,\"error\":null,\"errorType\":null}", result);
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+	
 	@AfterClass
 	public static void afterClass() {
 		LOGGER.info("程序退出，服务下线");

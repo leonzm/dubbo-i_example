@@ -34,7 +34,7 @@ public class DubboITest {
 	public void testSayHelloImpl() {
 		try {
 			//RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_java.service.SayHello", "1.0.0"); // @Service中的版本会覆盖dubboi.properties中的版本
-			RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_java.service.SayHello", "1.0.0", DubboI_Configuration.Loadbalance.random.toString(), 100, 10, 2, 0); // 获取service的同时，指定客户端的负载均衡等配置
+			RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_java.service.SayHello", "1.0.0", "", DubboI_Configuration.Loadbalance.random.toString(), 100, 10, 2, 0); // 获取service的同时，指定客户端的负载均衡等配置
 			Object result = sayHelloService.invoke("sayHello", "李四");
 			System.out.println("testSayHelloImpl result: " + result);
 			Assert.assertNotNull(result);
@@ -52,6 +52,19 @@ public class DubboITest {
 			System.out.println("testUserServiceImpl result: " + result);
 			Assert.assertNotNull(result);
 			Assert.assertEquals("{\"id\":1,\"name\":\"张三\"}", result.toString());
+		} catch (RpcServiceException e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testChineseSayHelloImpl() { // 同一个接口的不同实现类，可以用group来区分
+		try {
+			RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_java.service.SayHello", "1.0.0", "chinese", DubboI_Configuration.Loadbalance.random.toString(), 100, 10, 2, 0); // 获取service的同时，指定客户端的负载均衡等配置
+			Object result = sayHelloService.invoke("sayHello", "汤姆");
+			System.out.println("testChineseSayHelloImpl result: " + result);
+			Assert.assertNotNull(result);
+			Assert.assertEquals("你好，汤姆", result.toString());
 		} catch (RpcServiceException e) {
 			Assert.fail(e.getMessage());
 		}
