@@ -26,6 +26,7 @@ public class DubboITest {
 	public static void beforeClass() throws Exception {
 		DubboI_Configuration dubboi = DubboI_Configuration.newInstance("dubboi.properties"); // 指定dubbo-i配置文件，默认启动restfull服务
 		//DubboI_Configuration dubboi = DubboI_Configuration.newInstance("dubboi.properties", false); // 指定dubbo-i配置文件，不启动restfull服务
+		//DubboI_Configuration dubboi = DubboI_Configuration.newInstance("dubboi.properties", DubboI_Configuration.Loadbalance.random); // 指定dubbo-i配置文件，设置服务端的负载均衡
 		dubboi.registerRpcServer("com.pengshu.dubboi_example_java.service.impl"); // 手动指定需要服务注册的包
 		// dubboi.registerRpcServer(....); // 可以有多个
 	}
@@ -34,6 +35,7 @@ public class DubboITest {
 	public void testSayHelloImpl() {
 		try {
 			RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_java.service.SayHello", "1.0.0"); // @Service中的版本会覆盖dubboi.properties中的版本
+			//RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_java.service.SayHello", "1.0.0", DubboI_Configuration.Loadbalance.random); // 获取service的同时，指定客户端的负载均衡
 			Object result = sayHelloService.invoke("sayHello", "李四");
 			System.out.println("testSayHelloImpl result: " + result);
 			Assert.assertNotNull(result);
