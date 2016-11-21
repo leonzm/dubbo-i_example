@@ -35,7 +35,6 @@ public class DubboITest {
 	public static void beforeClass() throws Exception {
 		DubboI_Configuration.newInstance("dubboi.properties"); // 指定dubbo-i配置文件，默认启动restfull服务
 		//DubboI_Configuration.newInstance("dubboi.properties", false); // 指定dubbo-i配置文件，不启动restfull服务
-		//DubboI_Configuration dubboi = DubboI_Configuration.newInstance("dubboi.properties", DubboI_Configuration.Loadbalance.random); // 指定dubbo-i配置文件，设置服务端的负载均衡
 		LOGGER.info("spring启动，加载服务完成"); // 随spring而启动
 	}
 	
