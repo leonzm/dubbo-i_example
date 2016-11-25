@@ -24,8 +24,8 @@ public class DubboITest {
 
 	@BeforeClass
 	public static void beforeClass() throws Exception {
-		DubboI_Configuration dubboi = DubboI_Configuration.newInstance("dubboi.properties"); // 指定dubbo-i配置文件，默认启动restfull服务
-		//DubboI_Configuration dubboi = DubboI_Configuration.newInstance("dubboi.properties", false); // 指定dubbo-i配置文件，不启动restfull服务
+		DubboI_Configuration dubboi = DubboI_Configuration.newInstance("dubboi.properties"); // 指定dubbo-i配置文件，默认启动restful服务
+		//DubboI_Configuration dubboi = DubboI_Configuration.newInstance("dubboi.properties", false); // 指定dubbo-i配置文件，不启动restful服务
 		dubboi.registerRpcServer("com.pengshu.dubboi_example_java.service.impl"); // 手动指定需要服务注册的包
 		// dubboi.registerRpcServer(....); // 可以有多个
 	}
@@ -60,7 +60,8 @@ public class DubboITest {
 	@Test
 	public void testChineseSayHelloImpl() { // 同一个接口的不同实现类，可以用group来区分
 		try {
-			RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_java.service.SayHello", "1.0.0", "chinese", DubboI_Configuration.Loadbalance.random.toString(), 100, 10, 2, 0); // 获取service的同时，指定客户端的负载均衡等配置
+			RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_java.service.SayHello", "1.0.0", "chinese"); // 根据接口、版本、分组获取服务
+			//RpcGenericService sayHelloService = RpcGenericService.Create("com.pengshu.dubboi_example_java.service.SayHello", "1.0.0", "chinese", DubboI_Configuration.Loadbalance.random.toString(), 100, 10, 2, 0); // 获取service的同时，指定客户端的负载均衡等配置
 			Object result = sayHelloService.invoke("sayHello", "汤姆");
 			System.out.println("testChineseSayHelloImpl result: " + result);
 			Assert.assertNotNull(result);

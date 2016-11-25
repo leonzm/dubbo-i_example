@@ -13,6 +13,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.version>4.1.6.RELEASE</spring.version>
+    <dubboi.version>V1.00.00R161125</dubboi.version>
   </properties>
 
   <dependencies>
@@ -39,7 +40,7 @@
     <dependency>
       <groupId>com.pengshu</groupId>
       <artifactId>dubbo-i</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>${dubboi.version}</version>
     </dependency>
     
     <dependency>
