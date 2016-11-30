@@ -13,7 +13,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.version>4.1.6.RELEASE</spring.version>
-    <dubboi.version>V1.00.00R161125</dubboi.version>
+    <dubboi.version>V1.00.01R161130</dubboi.version>
   </properties>
 
   <dependencies>
